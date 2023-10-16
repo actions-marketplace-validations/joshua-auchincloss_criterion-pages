@@ -1,6 +1,6 @@
 # `criterion.rs` + gh pages
 
-Actions for `criterion.rs` to upload to github pages using [`actions/deploy-pages@v2`].
+Actions for `criterion.rs` to upload to github pages using [`actions/deploy-pages@v2`]. Compatible with CI cached performance benchmarks ([example] & [outputs]).
 
 E.g.
 
@@ -58,18 +58,20 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: './bench'
-      
+          path: "./bench"
+
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    steps:    
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
 ```
 
 [`actions/deploy-pages@v2`]: https://github.com/actions/deploy-pages/tree/v2/
+[example]: https://github.com/joshua-auchincloss/hashsets-perf
+[outputs]: https://joshua-auchincloss.github.io/hashsets-perf/bench/

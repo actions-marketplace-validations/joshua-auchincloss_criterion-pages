@@ -4,7 +4,6 @@ const io = require("@actions/io");
 const art = require("@actions/artifact");
 const glob = require("@actions/glob");
 const fs = require("fs/promises");
-const tar = require("tar-stream");
 
 const ROOT = "./target/criterion";
 const IDX = `{ROOT}/report/index.html`;
