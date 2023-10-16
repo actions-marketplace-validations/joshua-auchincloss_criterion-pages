@@ -1,7 +1,8 @@
 name: 'Criterion Pages'
-icon: bar-chart-2
-color: black
 description: 'Use criterion.rs benchmarks within your gh pages'
+branding:
+    icon: bar-chart-2
+    color: black
 inputs:
     root:
         description: 'Root directory the benchmarks are run from (. or ./.. path to package)'
