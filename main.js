@@ -12,18 +12,18 @@ const to_replace = '<a href="../';
 const replace_with = '<a href="./';
 
 async function main() {
-  const target_directory =
-    (await core.getInput("target_directory")) ?? "./docs";
+  const path =
+    (await core.getInput("path")) ?? "./docs";
 
   let [artifacts, _] = await Promise.all([
     fs.readdir(ROOT),
-    io.mkdirP(target_directory),
+    io.mkdirP(path),
   ]);
   console.log("found artifacts: ", artifacts);
   let moved = [];
   let promises = [];
   for (let art of artifacts) {
-    const out = target_directory + "/" + art;
+    const out = path + "/" + art;
     promises.push(
       io.cp(ROOT + "/" + art, out, {
         recursive: true,
@@ -33,23 +33,23 @@ async function main() {
   }
   await Promise.all(promises);
 
-  let report = target_directory + "/report/index.html";
+  let report = path + "/report/index.html";
   let ctnt = await fs.readFile(report).then((buff) => {
     return buff.toString("utf-8").replaceAll(to_replace, replace_with);
   });
   await fs
     .writeFile(report, ctnt)
     .then(async () => {
-      await io.cp(report, target_directory + "index.html");
+      await io.cp(report, path + "index.html");
     })
     .then(async () => {
-      await io.rmRF(target_directory + "/report");
+      await io.rmRF(path + "/report");
     });
-    await art.create().uploadArtifact("docs", await glob.create(target_directory, {
+    await art.create().uploadArtifact("docs", await glob.create(path, {
         matchDirectories: false,
     }));
 
-    core.setOutput("created_dir", target_directory)
+    core.setOutput("created_dir", path)
 }
 
 (async () => {

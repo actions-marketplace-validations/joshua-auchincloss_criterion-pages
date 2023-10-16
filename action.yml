@@ -1,7 +1,7 @@
 name: "Criterion Pages"
 description: "Use criterion.rs benchmarks within your gh pages"
 inputs:
-  target_directory:
+  path:
     description: "Target directory for @actions/pages to build from"
     required: true
     default: "."
