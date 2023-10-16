@@ -38499,15 +38499,9 @@ async function main() {
     let ctnt = await fs.readFile(report).then((buff) => {
         return buff.toString('utf-8').replaceAll(to_replace, replace_with)
     })
-    await fs
-        .writeFile(report, ctnt)
-        .then(async () => {
-            await io.cp(report, path + 'index.html')
-        })
-        .then(async () => {
-            await io.rmRF(path + '/report')
-        })
-
+    await fs.writeFile(report, ctnt)
+    await io.cp(report, path + '/index.html')
+    await io.rmRF(path + '/report')
     console.log('created artifacts: ', await (await glob.create(path)).glob())
 
     await fs.chmod(path, 0o755)
