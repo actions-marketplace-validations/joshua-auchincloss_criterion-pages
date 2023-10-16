@@ -2,7 +2,16 @@
 
 Github action for `criterion.rs` to upload to github pages using [`actions/deploy-pages@v2`]. Compatible with CI cached performance benchmarks (see [example] & [outputs]). Note: performance is **not** guaranteed in hosted CI runners. This action exists simply to make performance monitoring easier. Also see [criterion-compare-action].
 
-E.g. `pages.yaml`
+## Inputs
+
+| Input | Description                                                                          | Required | Default   | E.g.                   |
+| ----- | ------------------------------------------------------------------------------------ | -------- | --------- | ---------------------- |
+| root  | Root directory the benchmarks are run from (. or ./.. path to package)               | No       | `./`      | `./crates/my-benchlib` |
+| path  | The same path given to [`actions/upload-pages-artifact`] to be used as the build dir | No       | `./bench` | `./abc`                |
+
+## Usage
+
+E.g. [`.github/workflows/docs.yaml`](https://github.com/joshua-auchincloss/hashsets-perf/blob/main/.github/workflows/docs.yaml) ([outputs])
 
 ```yaml
 name: docs
@@ -18,6 +27,9 @@ permissions:
     contents: read
     pages: write
     id-token: write
+
+env:
+    ACTIONS_STEP_DEBUG: true
 
 jobs:
     build:
@@ -48,7 +60,7 @@ jobs:
               uses: actions/configure-pages@v3
 
             - name: Process html
-              uses: joshua-auchincloss/criterion-pages@main
+              uses: joshua-auchincloss/criterion-pages@v1
               with:
                   path: './bench'
 
@@ -76,3 +88,4 @@ jobs:
 [example]: https://github.com/joshua-auchincloss/hashsets-perf
 [outputs]: https://joshua-auchincloss.github.io/hashsets-perf
 [criterion-compare-action]: https://github.com/boa-dev/criterion-compare-action
+[`actions/upload-pages-artifact`]: https://github.com/actions/upload-pages-artifact/

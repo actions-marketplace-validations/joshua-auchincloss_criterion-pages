@@ -1,6 +1,10 @@
 name: 'Criterion Pages'
 description: 'Use criterion.rs benchmarks within your gh pages'
 inputs:
+    root:
+        description: 'Root directory the benchmarks are run from (. or ./.. path to package)'
+        required: true
+        default: '.'
     path:
         description: 'Target directory for @actions/pages to build from'
         required: true
