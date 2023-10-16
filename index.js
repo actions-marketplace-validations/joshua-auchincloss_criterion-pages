@@ -45,9 +45,6 @@ async function main() {
     .then(async () => {
       await io.rmRF(path + "/report");
     });
-    await art.create().uploadArtifact("docs", await glob.create(path, {
-        matchDirectories: false,
-    }));
 
     core.setOutput("created_dir", path)
 }
