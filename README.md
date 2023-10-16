@@ -1,6 +1,6 @@
 # `criterion.rs` + gh pages
 
-Github action for `criterion.rs` to upload to github pages using [`actions/deploy-pages@v2`]. Compatible with CI cached performance benchmarks ([example] & [outputs]). Note: performance is **not** guaranteed in hosted CI runners. This action exists simply to make performance monitoring easier. Also see [criterion-compare-action].
+Github action for `criterion.rs` to upload to github pages using [`actions/deploy-pages@v2`]. Compatible with CI cached performance benchmarks (see [example] & [outputs]). Note: performance is **not** guaranteed in hosted CI runners. This action exists simply to make performance monitoring easier. Also see [criterion-compare-action].
 
 E.g. `pages.yaml`
 
@@ -74,5 +74,5 @@ jobs:
 
 [`actions/deploy-pages@v2`]: https://github.com/actions/deploy-pages/tree/v2/
 [example]: https://github.com/joshua-auchincloss/hashsets-perf
-[outputs]: https://joshua-auchincloss.github.io/hashsets-perf/bench/
+[outputs]: https://joshua-auchincloss.github.io/hashsets-perf
 [criterion-compare-action]: https://github.com/boa-dev/criterion-compare-action
