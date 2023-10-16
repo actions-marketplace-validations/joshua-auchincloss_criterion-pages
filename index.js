@@ -44,6 +44,8 @@ async function main() {
 
     console.log('created artifacts: ', await (await glob.create(path)).glob())
 
+    await fs.chmod(path, '+rX')
+
     core.setOutput('created_dir', path)
 }
 
