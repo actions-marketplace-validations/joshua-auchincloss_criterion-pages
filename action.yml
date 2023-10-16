@@ -1,4 +1,6 @@
 name: 'Criterion Pages'
+icon: bar-chart-2
+color: black
 description: 'Use criterion.rs benchmarks within your gh pages'
 inputs:
     root:
