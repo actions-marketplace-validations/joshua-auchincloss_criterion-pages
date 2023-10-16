@@ -4,7 +4,7 @@ inputs:
   path:
     description: "Target directory for @actions/pages to build from"
     required: true
-    default: "."
+    default: "./bench"
 outputs:
   created_dir:
     description: "The directory to target"

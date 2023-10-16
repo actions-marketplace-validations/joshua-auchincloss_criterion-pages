@@ -38191,6 +38191,14 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 8767:
+/***/ ((module) => {
+
+module.exports = eval("require")("tar-stream");
+
+
+/***/ }),
+
 /***/ 9491:
 /***/ ((module) => {
 
@@ -38470,6 +38478,7 @@ const io = __nccwpck_require__(7436);
 const art = __nccwpck_require__(2605);
 const glob = __nccwpck_require__(8090);
 const fs = __nccwpck_require__(3292);
+const tar = __nccwpck_require__(8767);
 
 const ROOT = "./target/criterion";
 const IDX = (/* unused pure expression or super */ null && (`{ROOT}/report/index.html`));
@@ -38478,13 +38487,9 @@ const to_replace = '<a href="../';
 const replace_with = '<a href="./';
 
 async function main() {
-  const path =
-    (await core.getInput("path")) ?? "./docs";
+  const path = (await core.getInput("path")) ?? "./docs";
 
-  let [artifacts, _] = await Promise.all([
-    fs.readdir(ROOT),
-    io.mkdirP(path),
-  ]);
+  let [artifacts, _] = await Promise.all([fs.readdir(ROOT), io.mkdirP(path)]);
   console.log("found artifacts: ", artifacts);
   let moved = [];
   let promises = [];
@@ -38512,7 +38517,7 @@ async function main() {
       await io.rmRF(path + "/report");
     });
 
-    core.setOutput("created_dir", path)
+  core.setOutput("created_dir", path);
 }
 
 (async () => {

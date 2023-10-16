@@ -4,6 +4,7 @@ const io = require("@actions/io");
 const art = require("@actions/artifact");
 const glob = require("@actions/glob");
 const fs = require("fs/promises");
+const tar = require("tar-stream");
 
 const ROOT = "./target/criterion";
 const IDX = `{ROOT}/report/index.html`;
@@ -12,13 +13,9 @@ const to_replace = '<a href="../';
 const replace_with = '<a href="./';
 
 async function main() {
-  const path =
-    (await core.getInput("path")) ?? "./docs";
+  const path = (await core.getInput("path")) ?? "./docs";
 
-  let [artifacts, _] = await Promise.all([
-    fs.readdir(ROOT),
-    io.mkdirP(path),
-  ]);
+  let [artifacts, _] = await Promise.all([fs.readdir(ROOT), io.mkdirP(path)]);
   console.log("found artifacts: ", artifacts);
   let moved = [];
   let promises = [];
@@ -46,7 +43,7 @@ async function main() {
       await io.rmRF(path + "/report");
     });
 
-    core.setOutput("created_dir", path)
+  core.setOutput("created_dir", path);
 }
 
 (async () => {
