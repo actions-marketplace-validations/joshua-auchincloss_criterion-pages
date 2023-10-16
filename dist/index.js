@@ -38496,7 +38496,7 @@ async function main() {
                 recursive: true,
             })
         )
-        moved.push(out)
+        moved.push(tgt)
     }
 
     await Promise.all(promises)
