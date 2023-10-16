@@ -1,13 +1,13 @@
-name: "Criterion Pages"
-description: "Use criterion.rs benchmarks within your gh pages"
+name: 'Criterion Pages'
+description: 'Use criterion.rs benchmarks within your gh pages'
 inputs:
-  path:
-    description: "Target directory for @actions/pages to build from"
-    required: true
-    default: "./bench"
+    path:
+        description: 'Target directory for @actions/pages to build from'
+        required: true
+        default: './bench'
 outputs:
-  created_dir:
-    description: "The directory to target"
+    created_dir:
+        description: 'The directory to target'
 runs:
-  using: "node20"
-  main: "dist/index.js"
+    using: 'node20'
+    main: 'dist/index.js'

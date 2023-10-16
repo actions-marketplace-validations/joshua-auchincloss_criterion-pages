@@ -38464,64 +38464,64 @@ module.exports = require("zlib");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(2186);
-const github = __nccwpck_require__(5438);
-const io = __nccwpck_require__(7436);
-const art = __nccwpck_require__(2605);
-const glob = __nccwpck_require__(8090);
-const fs = __nccwpck_require__(3292);
+const core = __nccwpck_require__(2186)
+const github = __nccwpck_require__(5438)
+const io = __nccwpck_require__(7436)
+const art = __nccwpck_require__(2605)
+const glob = __nccwpck_require__(8090)
+const fs = __nccwpck_require__(3292)
 
-const ROOT = "./target/criterion";
-const IDX = (/* unused pure expression or super */ null && (`{ROOT}/report/index.html`));
+const ROOT = './target/criterion'
+const IDX = (/* unused pure expression or super */ null && (`{ROOT}/report/index.html`))
 
-const to_replace = '<a href="../';
-const replace_with = '<a href="./';
+const to_replace = '<a href="../'
+const replace_with = '<a href="./'
 
 async function main() {
-  const path = (await core.getInput("path")) ?? "./docs";
+    const path = (await core.getInput('path')) ?? './docs'
 
-  let [artifacts, _] = await Promise.all([fs.readdir(ROOT), io.mkdirP(path)]);
-  console.log("found artifacts: ", artifacts);
-  let moved = [];
-  let promises = [];
-  for (let art of artifacts) {
-    const out = path + "/" + art;
-    promises.push(
-      io.cp(ROOT + "/" + art, out, {
-        recursive: true,
-      }),
-    );
-    moved.push(out);
-  }
-  await Promise.all(promises);
+    let [artifacts, _] = await Promise.all([fs.readdir(ROOT), io.mkdirP(path)])
+    console.log('found artifacts: ', artifacts)
+    let moved = []
+    let promises = []
+    for (let art of artifacts) {
+        const out = path + '/' + art
+        promises.push(
+            io.cp(ROOT + '/' + art, out, {
+                recursive: true,
+            })
+        )
+        moved.push(out)
+    }
+    await Promise.all(promises)
 
-  let report = path + "/report/index.html";
-  let ctnt = await fs.readFile(report).then((buff) => {
-    return buff.toString("utf-8").replaceAll(to_replace, replace_with);
-  });
-  await fs
-    .writeFile(report, ctnt)
-    .then(async () => {
-      await io.cp(report, path + "index.html");
+    let report = path + '/report/index.html'
+    let ctnt = await fs.readFile(report).then((buff) => {
+        return buff.toString('utf-8').replaceAll(to_replace, replace_with)
     })
-    .then(async () => {
-      await io.rmRF(path + "/report");
-    });
-  
-    console.log("created artifacts: ", await fs.readdir(path))
+    await fs
+        .writeFile(report, ctnt)
+        .then(async () => {
+            await io.cp(report, path + 'index.html')
+        })
+        .then(async () => {
+            await io.rmRF(path + '/report')
+        })
 
-  core.setOutput("created_dir", path);
+    console.log('created artifacts: ', await (await glob.create(path)).glob())
+
+    core.setOutput('created_dir', path)
 }
 
-(async () => {
-  await main()
-    .catch((error) => {
-      core.setFailed(error.message);
-    })
-    .finally(() => {
-      console.log("complete");
-    });
-})();
+;(async () => {
+    await main()
+        .catch((error) => {
+            core.setFailed(error.message)
+        })
+        .finally(() => {
+            console.log('complete')
+        })
+})()
 
 })();
 
