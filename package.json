@@ -2,7 +2,7 @@
   "name": "criterion-pages",
   "version": "0.1.0",
   "description": "criterion gh actions",
-  "main": "main.js",
+  "main": "index.js",
   "repository": "https://github.com/joshua-auchincloss/criterion-pages",
   "author": "joshua-auchincloss",
   "license": "MIT",
