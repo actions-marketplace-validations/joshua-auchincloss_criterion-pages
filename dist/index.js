@@ -38507,6 +38507,8 @@ async function main() {
     .then(async () => {
       await io.rmRF(path + "/report");
     });
+  
+    console.log("created artifacts: ", await fs.readdir(path))
 
   core.setOutput("created_dir", path);
 }
