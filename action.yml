@@ -1,5 +1,4 @@
 name: "Criterion Pages"
-main: 'dist/index.js'
 description: "Use criterion.rs benchmarks within your gh pages"
 inputs:
   path:
@@ -11,4 +10,4 @@ outputs:
     description: "The directory to target"
 runs:
   using: "node20"
-  main: "index.js"
+  main: "dist/index.js"
